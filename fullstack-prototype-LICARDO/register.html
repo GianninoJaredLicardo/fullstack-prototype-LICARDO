@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Full-Stack App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen font-sans">
+
+    <div id="registrationStep" class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-200">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-[#212529]">Create Account</h2>
+            <p class="text-gray-500 text-sm mt-2">Sign up to get started</p>
+        </div>
+        
+        <form id="regForm" class="space-y-4">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="emailInput" required placeholder="name@company.com"
+                    class="w-full border border-gray-300 rounded-md p-2.5 outline-none focus:ring-2 focus:ring-blue-500 transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Username</label>
+                <input type="text" id="usernameInput" required placeholder="Jared123"
+                    class="w-full border border-gray-300 rounded-md p-2.5 outline-none focus:ring-2 focus:ring-blue-500 transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Password</label>
+                <input type="password" id="passwordInput" required placeholder="••••••••"
+                    class="w-full border border-gray-300 rounded-md p-2.5 outline-none focus:ring-2 focus:ring-blue-500 transition">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-1">Account Role</label>
+                <select id="roleInput" class="w-full border border-gray-300 rounded-md p-2.5 bg-white outline-none">
+                    <option value="User">Standard User</option>
+                    <option value="Admin">Administrator</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full bg-[#007bff] text-white font-bold py-3 rounded-md hover:bg-[#0069d9] transition shadow-md">
+                Register
+            </button>
+        </form>
+    </div>
+
+    <div id="verificationStep" class="hidden bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-200 text-center">
+        <div class="mb-4 text-blue-500">
+            <i class="fas fa-envelope-open-text text-5xl"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-[#212529]">Verify your email</h2>
+        <p class="text-gray-600 mt-2">We sent a 6-digit code to <span id="targetEmail" class="font-bold"></span></p>
+        
+        <div class="my-6">
+            <input type="text" id="verifyCode" maxlength="6" placeholder="000000"
+                class="w-32 text-center text-2xl tracking-[0.5em] border-b-2 border-gray-300 outline-none focus:border-blue-500">
+        </div>
+
+        <button id="verifyBtn" class="w-full bg-green-600 text-white font-bold py-3 rounded-md hover:bg-green-700 transition">
+            Verify & Finish
+        </button>
+        <p class="mt-4 text-xs text-gray-400 italic">Hint: Enter any 6 numbers to simulate success</p>
+    </div>
+
+    <script>
+        const regForm = document.getElementById('regForm');
+        const regStep = document.getElementById('registrationStep');
+        const verifyStep = document.getElementById('verificationStep');
+        
+        // Temporarily store user data during verification
+        let pendingUser = {};
+
+        regForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            pendingUser = {
+                username: document.getElementById('usernameInput').value,
+                role: document.getElementById('roleInput').value,
+                email: document.getElementById('emailInput').value
+            };
+
+            document.getElementById('targetEmail').innerText = pendingUser.email;
+
+            // Switch UI to verification
+            regStep.classList.add('hidden');
+            verifyStep.classList.remove('hidden');
+        });
+
+        document.getElementById('verifyBtn').addEventListener('click', () => {
+            const code = document.getElementById('verifyCode').value;
+            
+            if(code.length === 6) {
+                // Save to localStorage
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('username', pendingUser.username);
+                localStorage.setItem('userRole', pendingUser.role);
+
+                alert("Email Verified! Welcome aboard.");
+                window.location.href = 'index.html';
+            } else {
+                alert("Please enter a 6-digit code.");
+            }
+        });
+    </script>
+</body>
+</html>

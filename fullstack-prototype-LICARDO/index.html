@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gianniño Jared Licardo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-white font-sans text-gray-800">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="brand">Gianniño Jared Licardo</div>
+            
+            <div class="nav-actions">
+                <div id="authLinks" class="auth-stack">
+                    <a href="#" id="loginBtn" class="nav-link">Login</a>
+                    <a href="#" id="registerBtn" class="nav-link">Register</a>
+                </div>
+
+                <div id="userMenu" class="hidden user-dropdown group">
+                    <button class="dropdown-trigger">
+                        <span id="displayUsername">Username</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="#">My Requests</a>
+                        
+                        <div class="role-admin hidden admin-divider">
+                            <p class="admin-label">Admin Tools</p>
+                            <a href="#">Employees</a>
+                            <a href="#">Accounts</a>
+                            <a href="#">Departments</a>
+                        </div>
+
+                        <div class="logout-divider">
+                            <a href="#" id="logoutBtn" class="logout-link">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content-container">
+        <h1>Welcome to Full-Stack App</h1>
+        <p class="subtitle">A static prototype before backend integration. Simulates:</p>
+
+        <ul class="feature-list">
+            <li>Email registration + fake verification</li>
+            <li>Login with JWT-like token simulation</li>
+            <li>Role-based UI (Admin/User)</li>
+            <li>CRUD for Employees, Departments, Requests</li>
+        </ul>
+
+        <div class="alert-box">
+            <span class="icon">⚠️</span>
+            <p>
+                <strong>Note:</strong> 
+                All data is stored in <code class="code-highlight">localStorage</code>. Refresh to reset.
+            </p>
+        </div>
+
+        <button id="getStartedBtn" class="btn-primary">
+            Get Started <span class="arrow">→</span>
+        </button>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
